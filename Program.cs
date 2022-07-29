@@ -14,5 +14,6 @@ app.UseHttpsRedirection();
 
 // Situação
 app.MapMethods(SituacaoPost.Template, SituacaoPost.Methods, SituacaoPost.Handle);
+app.MapMethods(SituacaoGetAll.Template, SituacaoGetAll.Methods, SituacaoGetAll.Handle);
 
 app.Run();

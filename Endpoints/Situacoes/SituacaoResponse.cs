@@ -3,9 +3,11 @@
 public class SituacaoResponse
 {
     public int Id { get; set; }
+    public string Nome { get; set; }
 
-    public SituacaoResponse(int id)
+    public SituacaoResponse(int id, string nome)
     {
-        Id = id;        
+        Id = id;
+        Nome = nome;
     }
 }
