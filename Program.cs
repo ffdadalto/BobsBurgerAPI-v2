@@ -13,7 +13,8 @@ builder.Services.AddCors(options =>
     options.AddPolicy("MyAllowedOrigins",
         policy =>
         {
-            policy.WithOrigins("http://192.168.1.112:5173/") // note the port is included 
+            //policy.WithOrigins("http://192.168.1.112:5173/") // note the port is included 
+            policy.WithOrigins() // note the port is included 
                 .AllowAnyHeader()
                 .AllowAnyMethod()
                 .AllowAnyOrigin();
@@ -30,5 +31,7 @@ app.UseCors("MyAllowedOrigins");
 app.MapMethods(SituacaoPost.Template, SituacaoPost.Methods, SituacaoPost.Handle);
 app.MapMethods(SituacaoGetAll.Template, SituacaoGetAll.Methods, SituacaoGetAll.Handle);
 app.MapMethods(SituacaoPut.Template, SituacaoPut.Methods, SituacaoPut.Handle);
+app.MapMethods(SituacaoDelete.Template, SituacaoDelete.Methods, SituacaoDelete.Handle);
+app.MapMethods(SituacoesDelete.Template, SituacoesDelete.Methods, SituacoesDelete.Handle);
 
 app.Run();
