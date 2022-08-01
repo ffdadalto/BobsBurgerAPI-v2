@@ -3,12 +3,19 @@
 public class Situacao : Entity
 {
     public string? Cor { get; set; }
-    public Situacao(string nome, string cor)
+    public Situacao(string nome, string cor, bool ativo)
     {
         Nome = nome;
         Cor = cor;
-        Ativo = true;        
+        Ativo = ativo;
         CriadoPor = "Dev";
         CriadodEm = DateTime.Now;        
+    }
+
+    public void EditInfo(string nome, string cor, bool ativo)
+    {
+        Nome = nome;
+        Cor= cor;
+        Ativo = ativo;
     }
 }

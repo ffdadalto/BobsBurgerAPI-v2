@@ -8,12 +8,27 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddSqlServer<AppDbContext>(builder.Configuration["ConnectionString:Default"]);
 builder.Services.AddDbContext<AppDbContext>();
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("MyAllowedOrigins",
+        policy =>
+        {
+            policy.WithOrigins("http://192.168.1.112:5173/") // note the port is included 
+                .AllowAnyHeader()
+                .AllowAnyMethod()
+                .AllowAnyOrigin();
+        });
+});
+
 var app = builder.Build();
 
 app.UseHttpsRedirection();
+app.UseCors("MyAllowedOrigins");
+
 
 // Situação
 app.MapMethods(SituacaoPost.Template, SituacaoPost.Methods, SituacaoPost.Handle);
 app.MapMethods(SituacaoGetAll.Template, SituacaoGetAll.Methods, SituacaoGetAll.Handle);
+app.MapMethods(SituacaoPut.Template, SituacaoPut.Methods, SituacaoPut.Handle);
 
 app.Run();

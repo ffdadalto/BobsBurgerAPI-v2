@@ -11,7 +11,7 @@ public class SituacaoPost
 
     public static IResult Action(SituacaoRequest situacaoRequest, AppDbContext context)
     {
-        var situacao = new Situacao(situacaoRequest.Nome, situacaoRequest.Cor);
+        var situacao = new Situacao(situacaoRequest.Nome, situacaoRequest.Cor, situacaoRequest.Ativo);
 
         if (situacao == null)
             return Results.BadRequest();
