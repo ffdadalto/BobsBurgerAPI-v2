@@ -2,5 +2,6 @@
 
 public class SituacaoRequest
 {    
-    public string Nome { get; set; }    
+    public string Nome { get; set; }
+    public string Cor { get; set; }
 }

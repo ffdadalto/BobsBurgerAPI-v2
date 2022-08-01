@@ -11,7 +11,7 @@ public class SituacaoPost
 
     public static IResult Action(SituacaoRequest situacaoRequest, AppDbContext context)
     {
-        var situacao = new Situacao(situacaoRequest.Nome);
+        var situacao = new Situacao(situacaoRequest.Nome, situacaoRequest.Cor);
 
         if (situacao == null)
             return Results.BadRequest();
@@ -20,9 +20,8 @@ public class SituacaoPost
         context.Situacoes.Add(situacao);
         context.SaveChanges();
 
-        var response = new SituacaoResponse(situacao.Id, situacao.Nome, situacao.Ativo);
+        var response = new SituacaoResponse(situacao.Id, situacao.Nome, situacao.Cor, situacao.Ativo);
 
-        return Results.Created($"/situacao/{response.Id}", response);
-        //return Results.Ok("Funcionou!");
+        return Results.Created($"/situacao/{response.Id}", response);        
     }
 }

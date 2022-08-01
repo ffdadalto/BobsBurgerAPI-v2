@@ -2,12 +2,13 @@
 
 public class Situacao : Entity
 {
-    public Situacao(string nome)
+    public string? Cor { get; set; }
+    public Situacao(string nome, string cor)
     {
         Nome = nome;
-        Ativo = true;
+        Cor = cor;
+        Ativo = true;        
         CriadoPor = "Dev";
-        CriadodEm = DateTime.Now;
+        CriadodEm = DateTime.Now;        
     }
-
 }
