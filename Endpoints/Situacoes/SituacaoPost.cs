@@ -20,7 +20,7 @@ public class SituacaoPost
         context.Situacoes.Add(situacao);
         context.SaveChanges();
 
-        var response = new SituacaoResponse(situacao.Id, situacao.Nome);
+        var response = new SituacaoResponse(situacao.Id, situacao.Nome, situacao.Ativo);
 
         return Results.Created($"/situacao/{response.Id}", response);
         //return Results.Ok("Funcionou!");

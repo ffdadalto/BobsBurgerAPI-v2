@@ -11,7 +11,7 @@ public class SituacaoGetAll
     public static IResult Action(AppDbContext context)
     {
         var situacoes = context.Situacoes.ToList();
-        var response = situacoes.Select(c => new SituacaoResponse(c.Id, c.Nome));
+        var response = situacoes.Select(s => new SituacaoResponse(s.Id, s.Nome, s.Ativo));
 
         return Results.Ok(response);
     }
