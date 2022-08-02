@@ -1,3 +1,4 @@
+using BobsBurgerAPI_v2.Endpoints.Bairros;
 using BobsBurgerAPI_v2.Endpoints.Situacoes;
 using BobsBurgerAPI_v2.Infra.Data;
 
@@ -14,7 +15,7 @@ builder.Services.AddCors(options =>
         policy =>
         {
             //policy.WithOrigins("http://192.168.1.112:5173/") // note the port is included 
-            policy.WithOrigins() // note the port is included 
+            policy.WithOrigins()
                 .AllowAnyHeader()
                 .AllowAnyMethod()
                 .AllowAnyOrigin();
@@ -33,5 +34,8 @@ app.MapMethods(SituacaoGetAll.Template, SituacaoGetAll.Methods, SituacaoGetAll.H
 app.MapMethods(SituacaoPut.Template, SituacaoPut.Methods, SituacaoPut.Handle);
 app.MapMethods(SituacaoDelete.Template, SituacaoDelete.Methods, SituacaoDelete.Handle);
 app.MapMethods(SituacoesDelete.Template, SituacoesDelete.Methods, SituacoesDelete.Handle);
+
+// Bairro
+app.MapMethods(BairroGetAll.Template, BairroGetAll.Methods, BairroGetAll.Handle);
 
 app.Run();
