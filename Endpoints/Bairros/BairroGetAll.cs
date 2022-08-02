@@ -1,4 +1,6 @@
-﻿using BobsBurgerAPI_v2.Infra.Data;
+﻿using BobsBurgerAPI_v2.Domain.Enderecos;
+using BobsBurgerAPI_v2.Infra.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace BobsBurgerAPI_v2.Endpoints.Bairros;
 
@@ -10,9 +12,14 @@ public class BairroGetAll
 
     public static IResult Action(AppDbContext context)
     {
-        var bairros = context.Bairros.ToList();
+        var bairros = context.Bairros.Include(b => b.Cidade).ToList();
         var response = bairros.OrderByDescending(s => s.Id)
-            .Select(s => new BairroResponse(s.Id, s.Nome, s.CidadeId, s.Ativo));
+            .Select(s => new BairroResponse(
+                s.Id, 
+                s.Nome, 
+                s.CidadeId, 
+                s.Cidade.Nome,
+                s.Ativo));
 
         return Results.Ok(response);
     }
