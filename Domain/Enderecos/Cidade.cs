@@ -8,6 +8,7 @@ public class Cidade : Entity
     {
         Nome = nome;
         Ativo = ativo;
+        Bairros = new List<Bairro>();
         CriadoPor = "Dev";
         CriadodEm = DateTime.Now;
     }
