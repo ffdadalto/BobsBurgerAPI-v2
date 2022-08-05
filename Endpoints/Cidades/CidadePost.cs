@@ -1,5 +1,4 @@
 ﻿using BobsBurgerAPI_v2.Domain.Enderecos;
-using BobsBurgerAPI_v2.Endpoints.Cidades;
 using BobsBurgerAPI_v2.Infra.Data;
 
 namespace BobsBurgerAPI_v2.Endpoints.Cidades;

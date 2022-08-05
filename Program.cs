@@ -2,13 +2,16 @@ using BobsBurgerAPI_v2.Endpoints.Bairros;
 using BobsBurgerAPI_v2.Endpoints.Cidades;
 using BobsBurgerAPI_v2.Endpoints.Situacoes;
 using BobsBurgerAPI_v2.Infra.Data;
-
-
+using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddSqlServer<AppDbContext>(builder.Configuration["ConnectionString:Default"]);
 builder.Services.AddDbContext<AppDbContext>();
+builder.Services.AddControllers().AddJsonOptions(x =>
+                x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
+
+
 
 builder.Services.AddCors(options =>
 {
@@ -38,6 +41,7 @@ app.MapMethods(SituacoesDelete.Template, SituacoesDelete.Methods, SituacoesDelet
 
 // Bairro
 app.MapMethods(BairroGetAll.Template, BairroGetAll.Methods, BairroGetAll.Handle);
+app.MapMethods(BairroPost.Template, BairroPost.Methods, BairroPost.Handle);
 
 // Cidade
 app.MapMethods(CidadeGetAll.Template, CidadeGetAll.Methods, CidadeGetAll.Handle);

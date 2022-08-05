@@ -21,11 +21,6 @@ public class CidadeGetAll
                 s.Bairros.Count(),
                 s.Ativo));
 
-        //var response = bairros.OrderByDescending(s => s.Id)
-        //   .Select(s => new BairroResponseResumido(s.Id, s.Nome)
-
-        //       );
-
         return Results.Ok(response);
     }
 }
