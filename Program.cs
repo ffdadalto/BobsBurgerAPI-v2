@@ -38,4 +38,7 @@ app.MapMethods(SituacoesDelete.Template, SituacoesDelete.Methods, SituacoesDelet
 // Bairro
 app.MapMethods(BairroGetAll.Template, BairroGetAll.Methods, BairroGetAll.Handle);
 
+// Cidade
+app.MapMethods(CidadeGetAll.Template, CidadeGetAll.Methods, CidadeGetAll.Handle);
+
 app.Run();
