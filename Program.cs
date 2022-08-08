@@ -33,6 +33,7 @@ app.UseCors("MyAllowedOrigins");
 
 
 // Situação
+app.MapMethods(SituacaoGet.Template, SituacaoGet.Methods, SituacaoGet.Handle);
 app.MapMethods(SituacaoGetAll.Template, SituacaoGetAll.Methods, SituacaoGetAll.Handle);
 app.MapMethods(SituacaoPost.Template, SituacaoPost.Methods, SituacaoPost.Handle);
 app.MapMethods(SituacaoPut.Template, SituacaoPut.Methods, SituacaoPut.Handle);
@@ -40,6 +41,7 @@ app.MapMethods(SituacaoDelete.Template, SituacaoDelete.Methods, SituacaoDelete.H
 app.MapMethods(SituacoesDelete.Template, SituacoesDelete.Methods, SituacoesDelete.Handle);
 
 // Bairro
+app.MapMethods(BairroGet.Template, BairroGet.Methods, BairroGet.Handle);
 app.MapMethods(BairroGetAll.Template, BairroGetAll.Methods, BairroGetAll.Handle);
 app.MapMethods(BairroPost.Template, BairroPost.Methods, BairroPost.Handle);
 app.MapMethods(BairroPut.Template, BairroPut.Methods, BairroPut.Handle);
@@ -47,6 +49,7 @@ app.MapMethods(BairroDelete.Template, BairroDelete.Methods, BairroDelete.Handle)
 app.MapMethods(BairrosDelete.Template, BairrosDelete.Methods, BairrosDelete.Handle);
 
 // Cidade
+app.MapMethods(CidadeGet.Template, CidadeGet.Methods, CidadeGet.Handle);
 app.MapMethods(CidadeGetAll.Template, CidadeGetAll.Methods, CidadeGetAll.Handle);
 app.MapMethods(CidadePost.Template, CidadePost.Methods, CidadePost.Handle);
 app.MapMethods(CidadePut.Template, CidadePut.Methods, CidadePut.Handle);

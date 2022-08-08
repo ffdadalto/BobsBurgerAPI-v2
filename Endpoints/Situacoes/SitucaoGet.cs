@@ -1,12 +1,14 @@
 ﻿using BobsBurgerAPI_v2.Infra.Data;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace BobsBurgerAPI_v2.Endpoints.Situacoes;
 
-public class SituacaoDelete
+
+public class SituacaoGet
 {
     public static string Template => "/situacao/{id:int}";
-    public static string[] Methods => new string[] { HttpMethod.Delete.ToString() };
+    public static string[] Methods => new string[] { HttpMethod.Get.ToString() };
     public static Delegate Handle => Action;
 
     public static IResult Action([FromRoute] int id, AppDbContext context)
@@ -16,10 +18,12 @@ public class SituacaoDelete
         if (situacao == null)
             return Results.NotFound();
 
-        context.Situacoes.Remove(situacao);
-        
-        context.SaveChanges();
+        var response = new SituacaoResponse(
+                situacao.Id,
+                situacao.Nome,
+                situacao.Cor,
+                situacao.Ativo);
 
-        return Results.Ok();
+        return Results.Ok(response);
     }
 }
