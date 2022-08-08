@@ -17,5 +17,7 @@ public class Cidade : Entity
     {
         Nome = nome;
         Ativo = ativo;
+        EditadoPor = "Dev";
+        EditadoEm = DateTime.Now;
     }
 }

@@ -17,5 +17,7 @@ public class Pagamento : Entity
         Nome = nome;   
         Taxa = taxa;
         Ativo = ativo;
+        EditadoPor = "Dev";
+        EditadoEm = DateTime.Now;
     }
 }

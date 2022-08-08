@@ -19,6 +19,9 @@ public class BairroPost
 
         var cidade = context.Cidades.Where(s => s.Id == bairroRequest.CidadeId).FirstOrDefault();
 
+        if (cidade == null)
+            return Results.BadRequest();
+
         bairro.Cidade = cidade; 
 
         context.Bairros.Add(bairro);

@@ -19,5 +19,7 @@ public class Bairro : Entity
         Nome = nome;        
         Ativo = ativo;
         CidadeId = cidadeId;
+        EditadoPor = "Dev";
+        EditadoEm = DateTime.Now;
     }
 }

@@ -17,5 +17,7 @@ public class Situacao : Entity
         Nome = nome;
         Cor= cor;
         Ativo = ativo;
+        EditadoPor = "Dev";
+        EditadoEm = DateTime.Now;
     }
 }

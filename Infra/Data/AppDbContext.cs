@@ -1,4 +1,5 @@
-﻿using BobsBurgerAPI_v2.Domain.Enderecos;
+﻿using BobsBurgerAPI_v2.Domain.Clientes;
+using BobsBurgerAPI_v2.Domain.Enderecos;
 using BobsBurgerAPI_v2.Domain.Pedidos;
 using Microsoft.EntityFrameworkCore;
 
@@ -10,6 +11,7 @@ public class AppDbContext : DbContext
     public DbSet<Cidade> Cidades { get; set; }
     public DbSet<Bairro> Bairros { get; set; }
     public DbSet<Pagamento> Pagamentos { get; set; }
+    public DbSet<Cliente> Clientes { get; set; }
 
     public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
 

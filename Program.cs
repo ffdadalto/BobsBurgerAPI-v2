@@ -1,5 +1,6 @@
 using BobsBurgerAPI_v2.Endpoints.Bairros;
 using BobsBurgerAPI_v2.Endpoints.Cidades;
+using BobsBurgerAPI_v2.Endpoints.Clientes;
 using BobsBurgerAPI_v2.Endpoints.Pagamentos;
 using BobsBurgerAPI_v2.Endpoints.Situacoes;
 using BobsBurgerAPI_v2.Infra.Data;
@@ -64,5 +65,13 @@ app.MapMethods(PagamentoPost.Template, PagamentoPost.Methods, PagamentoPost.Hand
 app.MapMethods(PagamentoPut.Template, PagamentoPut.Methods, PagamentoPut.Handle);
 app.MapMethods(PagamentoDelete.Template, PagamentoDelete.Methods, PagamentoDelete.Handle);
 app.MapMethods(PagamentosDelete.Template, PagamentosDelete.Methods, PagamentosDelete.Handle);
+
+// Cliente
+//app.MapMethods(PagamentoGet.Template, PagamentoGet.Methods, PagamentoGet.Handle);
+app.MapMethods(ClienteGetAll.Template, ClienteGetAll.Methods, ClienteGetAll.Handle);
+app.MapMethods(ClientePost.Template, ClientePost.Methods, ClientePost.Handle);
+//app.MapMethods(PagamentoPut.Template, PagamentoPut.Methods, PagamentoPut.Handle);
+//app.MapMethods(PagamentoDelete.Template, PagamentoDelete.Methods, PagamentoDelete.Handle);
+//app.MapMethods(PagamentosDelete.Template, PagamentosDelete.Methods, PagamentosDelete.Handle);
 
 app.Run();
