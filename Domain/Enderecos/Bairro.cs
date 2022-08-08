@@ -14,9 +14,10 @@ public class Bairro : Entity
         CriadodEm = DateTime.Now;
     }
 
-    public void EditInfo(string nome, bool ativo)
+    public void EditInfo(string nome, int cidadeId, bool ativo)
     {
         Nome = nome;        
         Ativo = ativo;
+        CidadeId = cidadeId;
     }
 }

@@ -19,7 +19,8 @@ public class BairroPut
         if (bairro == null)
             return Results.NotFound();
 
-        bairro.EditInfo(bairroRequest.Nome, bairroRequest.Ativo);
+        bairro.EditInfo(bairroRequest.Nome, bairroRequest.CidadeId, bairroRequest.Ativo);
+        bairro.Cidade = context.Cidades.Where(c => c.Id == bairroRequest.CidadeId).FirstOrDefault();
 
         //context.Situacoes.Add(situacao);        
         context.SaveChanges();
