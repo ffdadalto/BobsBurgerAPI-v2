@@ -25,7 +25,13 @@ public class BairroPut
         //context.Situacoes.Add(situacao);        
         context.SaveChanges();
 
-        var response = new BairroResponse(bairro.Id, bairro.Nome, bairro.CidadeId, bairro.Cidade.Nome, bairro.Ativo);
+        var response = new BairroResponse(
+            bairro.Id,
+            bairro.Nome,
+            bairro.Clientes.Count(),
+            bairro.Cidade.Id,
+            bairro.Cidade.Nome,
+            bairro.Ativo);
 
         return Results.Ok(response);
     }

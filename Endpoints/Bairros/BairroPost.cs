@@ -12,12 +12,17 @@ public class BairroPost
 
     public static IResult Action(BairroRequest bairroRequest, AppDbContext context)
     {
-        var bairro = new Bairro(bairroRequest.Nome, bairroRequest.CidadeId, bairroRequest.Ativo);
+        var bairro = new Bairro(
+            bairroRequest.Nome, 
+            bairroRequest.CidadeId, 
+            bairroRequest.Ativo);
 
         if (bairro == null)
             return Results.BadRequest();
 
-        var cidade = context.Cidades.Where(s => s.Id == bairroRequest.CidadeId).FirstOrDefault();
+        var cidade = context.Cidades
+            .Where(s => s.Id == bairroRequest.CidadeId)
+            .FirstOrDefault();
 
         if (cidade == null)
             return Results.BadRequest();
@@ -27,7 +32,13 @@ public class BairroPost
         context.Bairros.Add(bairro);
         context.SaveChanges();
 
-        var response = new BairroResponse(bairro.Id, bairro.Nome, bairro.Cidade.Id, bairro.Cidade.Nome, bairro.Ativo);
+        var response = new BairroResponse(
+            bairro.Id, 
+            bairro.Nome, 
+            bairro.Clientes.Count(),
+            bairro.Cidade.Id, 
+            bairro.Cidade.Nome, 
+            bairro.Ativo);
 
         return Results.Created($"/bairro/{bairro.Id}", response);
     }

@@ -12,11 +12,15 @@ public class BairroGetAll
 
     public static IResult Action(AppDbContext context)
     {
-        var bairros = context.Bairros.Include(b => b.Cidade).ToList();
+        var bairros = context.Bairros
+            .Include(b => b.Clientes)
+            .Include(b => b.Cidade).ToList();
+
         var response = bairros.OrderByDescending(s => s.Id)
             .Select(s => new BairroResponse(
                 s.Id,
                 s.Nome,
+                s.Clientes.Count(),
                 s.Cidade.Id,
                 s.Cidade.Nome,
                 s.Ativo));

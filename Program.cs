@@ -67,11 +67,11 @@ app.MapMethods(PagamentoDelete.Template, PagamentoDelete.Methods, PagamentoDelet
 app.MapMethods(PagamentosDelete.Template, PagamentosDelete.Methods, PagamentosDelete.Handle);
 
 // Cliente
-//app.MapMethods(PagamentoGet.Template, PagamentoGet.Methods, PagamentoGet.Handle);
+app.MapMethods(ClienteGet.Template, ClienteGet.Methods, ClienteGet.Handle);
 app.MapMethods(ClienteGetAll.Template, ClienteGetAll.Methods, ClienteGetAll.Handle);
 app.MapMethods(ClientePost.Template, ClientePost.Methods, ClientePost.Handle);
-//app.MapMethods(PagamentoPut.Template, PagamentoPut.Methods, PagamentoPut.Handle);
-//app.MapMethods(PagamentoDelete.Template, PagamentoDelete.Methods, PagamentoDelete.Handle);
-//app.MapMethods(PagamentosDelete.Template, PagamentosDelete.Methods, PagamentosDelete.Handle);
+app.MapMethods(ClientePut.Template, ClientePut.Methods, ClientePut.Handle);
+app.MapMethods(ClienteDelete.Template, ClienteDelete.Methods, ClienteDelete.Handle);
+app.MapMethods(ClientesDelete.Template, ClientesDelete.Methods, ClientesDelete.Handle);
 
 app.Run();
