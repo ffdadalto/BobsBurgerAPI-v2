@@ -10,10 +10,30 @@ public class ClientePut
     public static string[] Methods => new string[] { HttpMethod.Put.ToString() };
     public static Delegate Handle => Action;
 
+    public record ClienteResponse(
+        int Id,
+        string Nome,
+        string Apelido,
+        string Telefone,
+        string? Cep,
+        string Endereco,
+        string Numero,        
+        bool Ativo,
+        int BairroId);
+
+    public record ClienteRequest(        
+        string Nome,
+        string Apelido,
+        string Telefone,
+        string? Cep,
+        string Endereco,
+        string Numero,
+        bool Ativo,
+        int BairroId);
+
     public static IResult Action([FromRoute] int id, ClienteRequest clienteRequest, AppDbContext context)
     {
-        var cliente = context.Clientes
-            .Include(c => c.Bairro)
+        var cliente = context.Clientes            
             .Where(s => s.Id == id).FirstOrDefault();
 
         if (cliente == null)
@@ -28,15 +48,7 @@ public class ClientePut
             clienteRequest.Numero,
             clienteRequest.BairroId,
             clienteRequest.Ativo);        
-
-        var bairro = context.Bairros.Where(c => c.Id == clienteRequest.BairroId).FirstOrDefault();        
-
-        if(bairro == null)
-            return Results.NotFound();
-
-        cliente.Bairro = bairro;
-
-        //context.Situacoes.Add(situacao);        
+                
         context.SaveChanges();
 
         var response = new ClienteResponse(
@@ -47,9 +59,8 @@ public class ClientePut
            cliente.Cep,
            cliente.Endereco,
            cliente.Numero,
-           cliente.BairroId,
-           cliente.Bairro.Nome,
-           cliente.Ativo);
+           cliente.Ativo,
+           cliente.BairroId);
 
         return Results.Ok(response);
     }

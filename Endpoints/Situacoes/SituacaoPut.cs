@@ -10,6 +10,9 @@ public class SituacaoPut
     public static string[] Methods => new string[] { HttpMethod.Put.ToString() };
     public static Delegate Handle => Action;
 
+    public record SituacaoResponse(int id, string nome, string cor, bool ativo);
+    public record SituacaoRequest(string Nome, string Cor, bool Ativo);
+
     public static IResult Action([FromRoute] int id,  SituacaoRequest situacaoRequest, AppDbContext context)
     {
         var situacao = context.Situacoes.Where(s => s.Id == id).FirstOrDefault();

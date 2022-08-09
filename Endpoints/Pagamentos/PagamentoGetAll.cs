@@ -8,6 +8,8 @@ public class PagamentoGetAll
     public static string[] Methods => new string[] { HttpMethod.Get.ToString() };
     public static Delegate Handle => Action;
 
+    public record PagamentoResponse(int Id, string Nome, decimal Taxa, bool Ativo);
+
     public static IResult Action(AppDbContext context)
     {
         var pagamentos = context.Pagamentos.ToList();

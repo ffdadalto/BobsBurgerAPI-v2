@@ -10,6 +10,9 @@ public class PagamentoPut
     public static string[] Methods => new string[] { HttpMethod.Put.ToString() };
     public static Delegate Handle => Action;
 
+    public record PagamentoResponse(int Id, string Nome, decimal Taxa, bool Ativo);
+    public record PagamentoRequest(string Nome, decimal Taxa, bool Ativo);
+
     public static IResult Action([FromRoute] int id, PagamentoRequest pagamentoRequest, AppDbContext context)
     {
         var pagamento = context.Pagamentos.Where(s => s.Id == id).FirstOrDefault();

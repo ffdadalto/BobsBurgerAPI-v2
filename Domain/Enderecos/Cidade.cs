@@ -2,13 +2,12 @@
 
 public class Cidade : Entity
 {
-    public List<Bairro> Bairros { get; set; }
+    public IEnumerable<Bairro> Bairros { get; set; }
 
     public Cidade(string nome, bool ativo)
     {
         Nome = nome;
-        Ativo = ativo;
-        Bairros = new List<Bairro>();
+        Ativo = ativo;        
         CriadoPor = "Dev";
         CriadodEm = DateTime.Now;
     }

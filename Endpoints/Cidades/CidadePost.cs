@@ -9,6 +9,8 @@ public class CidadePost
     public static string[] Methods => new string[] { HttpMethod.Post.ToString() };
     public static Delegate Handle => Action;
     
+    public record CidadeRequest(string Nome, bool Ativo);
+    public record CidadeResponse(int Id, string Nome, bool Ativo);
 
     public static IResult Action(CidadeRequest cidadeRequest, AppDbContext context)
     {
@@ -17,11 +19,13 @@ public class CidadePost
         if (cidade == null)
             return Results.BadRequest();
 
-
         context.Cidades.Add(cidade);
         context.SaveChanges();
 
-        var response = new CidadeResponse(cidade.Id, cidade.Nome, cidade.Bairros.Count(), cidade.Ativo);
+        var response = new CidadeResponse(
+            cidade.Id, 
+            cidade.Nome,             
+            cidade.Ativo);
 
         return Results.Created($"/cidade/{cidade.Id}", response);        
     }

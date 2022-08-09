@@ -11,14 +11,16 @@ public class CidadeGetAll
     public static string[] Methods => new string[] { HttpMethod.Get.ToString() };
     public static Delegate Handle => Action;
 
+    public record CidadeResponse(int Id, string Nome, bool Ativo);
+
     public static IResult Action(AppDbContext context)
     {
-        var cidades = context.Cidades.Include(c => c.Bairros).ToList();
+        var cidades = context.Cidades;
+
         var response = cidades.OrderByDescending(s => s.Id)
             .Select(s => new CidadeResponse(
                 s.Id,
-                s.Nome,
-                s.Bairros.Count(),
+                s.Nome,                
                 s.Ativo));
 
         return Results.Ok(response);

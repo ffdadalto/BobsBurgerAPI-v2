@@ -9,18 +9,27 @@ public class SituacaoPost
     public static string[] Methods => new string[] { HttpMethod.Post.ToString() };
     public static Delegate Handle => Action;
 
+    public record SituacaoResponse(int Id, string Nome, string Cor, bool Ativo);
+    public record SituacaoRequest(string Nome, string Cor, bool Ativo);
+
     public static IResult Action(SituacaoRequest situacaoRequest, AppDbContext context)
     {
-        var situacao = new Situacao(situacaoRequest.Nome, situacaoRequest.Cor, situacaoRequest.Ativo);
+        var situacao = new Situacao(
+            situacaoRequest.Nome, 
+            situacaoRequest.Cor, 
+            situacaoRequest.Ativo);
 
         if (situacao == null)
             return Results.BadRequest();
 
-
         context.Situacoes.Add(situacao);
         context.SaveChanges();
 
-        var response = new SituacaoResponse(situacao.Id, situacao.Nome, situacao.Cor, situacao.Ativo);
+        var response = new SituacaoResponse(
+            situacao.Id, 
+            situacao.Nome, 
+            situacao.Cor, 
+            situacao.Ativo);
 
         return Results.Created($"/situacao/{response.Id}", response);        
     }

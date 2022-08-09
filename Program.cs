@@ -11,9 +11,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddSqlServer<AppDbContext>(builder.Configuration["ConnectionString:Default"]);
 builder.Services.AddDbContext<AppDbContext>();
 builder.Services.AddControllers().AddJsonOptions(x =>
-                x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
-
-
+                x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler
+                .IgnoreCycles);
 
 builder.Services.AddCors(options =>
 {

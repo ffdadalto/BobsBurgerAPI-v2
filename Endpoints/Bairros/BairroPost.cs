@@ -9,6 +9,9 @@ public class BairroPost
     public static string[] Methods => new string[] { HttpMethod.Post.ToString() };
     public static Delegate Handle => Action;
 
+    public record BairroResponse(int Id, string Nome, int CidadeId, bool Ativo);
+    public record BairroRequest(string Nome, int CidadeId, bool Ativo);
+
 
     public static IResult Action(BairroRequest bairroRequest, AppDbContext context)
     {
@@ -18,26 +21,15 @@ public class BairroPost
             bairroRequest.Ativo);
 
         if (bairro == null)
-            return Results.BadRequest();
-
-        var cidade = context.Cidades
-            .Where(s => s.Id == bairroRequest.CidadeId)
-            .FirstOrDefault();
-
-        if (cidade == null)
-            return Results.BadRequest();
-
-        bairro.Cidade = cidade; 
+            return Results.BadRequest();        
 
         context.Bairros.Add(bairro);
         context.SaveChanges();
 
         var response = new BairroResponse(
             bairro.Id, 
-            bairro.Nome, 
-            bairro.Clientes.Count(),
-            bairro.Cidade.Id, 
-            bairro.Cidade.Nome, 
+            bairro.Nome,             
+            bairro.CidadeId,             
             bairro.Ativo);
 
         return Results.Created($"/bairro/{bairro.Id}", response);

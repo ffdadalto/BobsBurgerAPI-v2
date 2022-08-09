@@ -8,21 +8,19 @@ public class BairroGetAll
 {
     public static string Template => "/bairro";
     public static string[] Methods => new string[] { HttpMethod.Get.ToString() };
-    public static Delegate Handle => Action;    
+    public static Delegate Handle => Action;
+
+    public record BairroResponse(int Id, string Nome, int CidadeId, bool Ativo);
 
     public static IResult Action(AppDbContext context)
     {
-        var bairros = context.Bairros
-            .Include(b => b.Clientes)
-            .Include(b => b.Cidade).ToList();
+        var bairros = context.Bairros;                      
 
         var response = bairros.OrderByDescending(s => s.Id)
             .Select(s => new BairroResponse(
                 s.Id,
-                s.Nome,
-                s.Clientes.Count(),
-                s.Cidade.Id,
-                s.Cidade.Nome,
+                s.Nome,                
+                s.CidadeId,                
                 s.Ativo));
 
         return Results.Ok(response);

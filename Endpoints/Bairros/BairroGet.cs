@@ -10,11 +10,11 @@ public class BairroGet
     public static string[] Methods => new string[] { HttpMethod.Get.ToString() };
     public static Delegate Handle => Action;
 
+    public record BairroResponse(int Id, string Nome, int CidadeId, bool Ativo);
+
     public static IResult Action([FromRoute] int id, AppDbContext context)
     {
-        var bairro = context.Bairros
-            .Include(b => b.Clientes)
-            .Include(b => b.Cidade)
+        var bairro = context.Bairros                     
             .Where(s => s.Id == id).FirstOrDefault();
 
         if (bairro == null)
@@ -22,10 +22,8 @@ public class BairroGet
 
         var response = new BairroResponse(
             bairro.Id,
-            bairro.Nome,
-            bairro.Clientes.Count(),
-            bairro.Cidade.Id,
-            bairro.Cidade.Nome,
+            bairro.Nome,            
+            bairro.CidadeId,            
             bairro.Ativo);
 
         return Results.Ok(response);

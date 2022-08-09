@@ -9,6 +9,9 @@ public class PagamentoPost
     public static string[] Methods => new string[] { HttpMethod.Post.ToString() };
     public static Delegate Handle => Action;
 
+    public record PagamentoResponse(int Id, string Nome, decimal Taxa, bool Ativo);
+    public record PagamentoRequest(string Nome, decimal Taxa, bool Ativo);
+
     public static IResult Action(PagamentoRequest pagamentoRequest, AppDbContext context)
     {
         var pagamento = new Pagamento(pagamentoRequest.Nome, pagamentoRequest.Taxa, pagamentoRequest.Ativo);

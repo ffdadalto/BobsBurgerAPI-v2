@@ -9,11 +9,10 @@ public class Cliente : Entity
     public string? Cep { get; set; }
     public string Endereco { get; set; }
     public string Numero { get; set; }
-    public int BairroId { get; set; }
-    public Bairro Bairro { get; set; }
+    public int BairroId { get; set; }    
 
-    public Cliente(string nome, string apelido, string telefone, string cep, string endereco,
-        string numero, int bairroId, bool ativo)
+    public Cliente(string nome, string apelido, string telefone, 
+        string cep, string endereco, string numero, bool ativo, int bairroId)
     {
         Nome = nome;
         Apelido = apelido;
@@ -27,8 +26,8 @@ public class Cliente : Entity
         CriadodEm = DateTime.Now;
     }
 
-    public void EditInfo(string nome, string apelido, string telefone, string cep, string endereco,
-        string numero, int bairroId, bool ativo)
+    public void EditInfo(string nome, string apelido, string telefone, 
+        string cep, string endereco, string numero, int bairroId, bool ativo)
     {
         Nome = nome;
         Apelido = apelido;

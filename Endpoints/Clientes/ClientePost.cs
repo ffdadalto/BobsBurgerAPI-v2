@@ -9,6 +9,26 @@ public class ClientePost
     public static string[] Methods => new string[] { HttpMethod.Post.ToString() };
     public static Delegate Handle => Action;
 
+    public record ClienteRequest(
+         string Nome,
+         string Apelido,
+         string Telefone,
+         string? Cep,
+         string Endereco,
+         string Numero,
+         bool Ativo,
+         int BairroId);
+
+    public record ClienteResponse(
+        int Id,
+        string Nome,
+        string Apelido,
+        string Telefone,
+        string? Cep,
+        string Endereco,
+        string Numero,
+        bool Ativo,
+        int BairroId);
 
     public static IResult Action(ClienteRequest clienteRequest, AppDbContext context)
     {
@@ -19,33 +39,25 @@ public class ClientePost
             clienteRequest.Cep,
             clienteRequest.Endereco,
             clienteRequest.Numero,
-            clienteRequest.BairroId,
-            clienteRequest.Ativo);
+            clienteRequest.Ativo,
+            clienteRequest.BairroId);
 
         if (cliente == null)
-            return Results.BadRequest();
-
-        var bairro = context.Bairros.Where(s => s.Id == clienteRequest.BairroId).FirstOrDefault();
-
-        if (bairro == null)
-            return Results.BadRequest();
-
-        cliente.Bairro = bairro;
+            return Results.BadRequest();        
 
         context.Clientes.Add(cliente);
         context.SaveChanges();
 
         var response = new ClienteResponse(
-            cliente.Id, 
+            cliente.Id,
             cliente.Nome,
             cliente.Apelido,
             cliente.Telefone,
             cliente.Cep,
             cliente.Endereco,
             cliente.Numero,
-            cliente.BairroId,
-            cliente.Bairro.Nome,
-            cliente.Ativo);
+            cliente.Ativo,
+            cliente.BairroId);
 
         return Results.Created($"/cliente/{cliente.Id}", response);
     }

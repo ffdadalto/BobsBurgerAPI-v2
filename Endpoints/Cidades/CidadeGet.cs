@@ -13,17 +13,20 @@ public class CidadeGet
 
     public static IResult Action([FromRoute] int id, AppDbContext context)
     {
-        var cidade = context.Cidades.Include(c => c.Bairros).Where(s => s.Id == id).FirstOrDefault();
+        var cidade = context.Cidades
+            .Include(c => c.Bairros)
+            .Where(s => s.Id == id)
+            .FirstOrDefault();
 
         if (cidade == null)
             return Results.NotFound();
 
-        var response = new CidadeResponse(
-                cidade.Id,
-                cidade.Nome,
-                cidade.Bairros.Count(),
-                cidade.Ativo);
+        //var response = new CidadeResponse(
+        //        cidade.Id,
+        //        cidade.Nome,
+        //        cidade.Bairros.Count(),
+        //        cidade.Ativo);
 
-        return Results.Ok(response);
+        return Results.Ok(cidade);
     }
 }
