@@ -12,8 +12,20 @@ public class BairroGetAll
 
     public static IResult Action(AppDbContext ctx)
     {
-        var bairros = ctx.Bairros.OrderByDescending(b => b.Id);                      
+        var bairros = ctx.Bairros
+            .Include(b => b.Clientes)
+            .OrderByDescending(b => b.Id);
 
-        return Results.Ok(bairros);
+        //return Results.Ok(bairros);
+
+        return Results.Ok(bairros.Select(b => new
+        {
+            id = b.Id,
+            nome = b.Nome,
+            qtdClientes = b.Clientes.Count(),
+            ativo = b.Ativo,
+            cidadeId = b.CidadeId,
+            cidade = ctx.Cidades.FirstOrDefault(c => c.Id == b.CidadeId)
+        }));
     }
 }

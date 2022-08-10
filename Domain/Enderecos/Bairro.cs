@@ -5,12 +5,14 @@ namespace BobsBurgerAPI_v2.Domain.Enderecos;
 
 public class Bairro : Entity
 {
-    public int CidadeId { get; set; }    
+    public int CidadeId { get; set; }   
+    public virtual List<Cliente> Clientes { get; set; }
 
     public Bairro(string nome, int cidadeId, bool ativo)
     {
         Nome = nome;  
-        CidadeId = cidadeId;        
+        CidadeId = cidadeId;
+        Clientes = new List<Cliente>();
         Ativo = ativo;
         CriadoPor = "Dev";
         CriadodEm = DateTime.Now;

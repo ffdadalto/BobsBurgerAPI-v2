@@ -17,6 +17,18 @@ public class ClienteGetAll
             .Include(c => c.Bairro)
             .OrderByDescending(c => c.Id);
 
-        return Results.Ok(clientes);
+        //return Results.Ok(clientes);
+
+        return Results.Ok(clientes.Select(c => new
+        {
+            id = c.Id,
+            nome = c.Nome,
+            apelido = c.Apelido,
+            telefone = c.Telefone,
+            endereco = c.Endereco,
+            numero = c.Numero,            
+            ativo = c.Ativo,  
+            bairro = c.Bairro
+        }));
     }
 }

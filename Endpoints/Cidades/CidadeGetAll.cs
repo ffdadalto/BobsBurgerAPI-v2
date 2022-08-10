@@ -13,8 +13,17 @@ public class CidadeGetAll
     
     public static IResult Action(AppDbContext context)
     {
-        var cidades = context.Cidades.OrderByDescending(c => c.Id);        
+        var cidades = context.Cidades   
+            .Include(c => c.Bairros)
+            .OrderByDescending(c => c.Id);        
 
-        return Results.Ok(cidades);
+        return Results.Ok(cidades.Select( c => new
+        {
+            id = c.Id,
+            nome = c.Nome,
+            qtdBairros = c.Bairros.Count(),
+            ativo = c.Ativo,
+            bairros = c.Bairros
+        }));
     }
 }

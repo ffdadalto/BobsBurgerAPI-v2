@@ -1,4 +1,5 @@
-﻿using BobsBurgerAPI_v2.Infra.Data;
+﻿using BobsBurgerAPI_v2.Domain.Enderecos;
+using BobsBurgerAPI_v2.Infra.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -13,14 +14,13 @@ public class CidadeGet
 
     public static IResult Action([FromRoute] int id, AppDbContext ctx)
     {
-        var cidade = ctx.Cidades
-            .Include(c => c.Bairros)
+        var cidade = ctx.Cidades          
             .Where(s => s.Id == id)
             .FirstOrDefault();
 
         if (cidade == null)
-            return Results.NotFound();        
+            return Results.NotFound();
 
-        return Results.Ok(cidade);
+        return Results.Ok(cidade);        
     }
 }

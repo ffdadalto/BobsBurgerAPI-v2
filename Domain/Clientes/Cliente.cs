@@ -10,7 +10,7 @@ public class Cliente : Entity
     public string? Endereco { get; set; }
     public string? Numero { get; set; }
     public int BairroId { get; set; }
-    public virtual Bairro? Bairro { get; set; }
+    public virtual Bairro Bairro { get; set; }
 
     public Cliente(string nome, string apelido, string telefone, 
         string cep, string endereco, string numero, bool ativo, 
