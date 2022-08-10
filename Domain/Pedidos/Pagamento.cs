@@ -3,7 +3,7 @@
 public class Pagamento : Entity
 {
     public decimal? Taxa { get; set; }
-    public Pagamento(string nome, decimal taxa, bool ativo)
+    public Pagamento(string nome, decimal? taxa, bool ativo)
     {
         Nome = nome;        
         Ativo = ativo;
@@ -12,7 +12,7 @@ public class Pagamento : Entity
         CriadodEm = DateTime.Now;
     }
 
-    public void EditInfo(string nome, decimal taxa, bool ativo)
+    public void EditInfo(string nome, decimal? taxa, bool ativo)
     {
         Nome = nome;   
         Taxa = taxa;
