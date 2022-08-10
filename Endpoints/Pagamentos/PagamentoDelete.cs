@@ -9,16 +9,16 @@ public class PagamentoDelete
     public static string[] Methods => new string[] { HttpMethod.Delete.ToString() };
     public static Delegate Handle => Action;
 
-    public static IResult Action([FromRoute] int id, AppDbContext context)
+    public static IResult Action([FromRoute] int id, AppDbContext ctx)
     {
-        var pagamento = context.Pagamentos.Where(s => s.Id == id).FirstOrDefault();
+        var pagamento = ctx.Pagamentos.Where(s => s.Id == id).FirstOrDefault();
 
         if (pagamento == null)
             return Results.NotFound();
 
-        context.Pagamentos.Remove(pagamento);
+        ctx.Pagamentos.Remove(pagamento);
 
-        context.SaveChanges();
+        ctx.SaveChanges();
 
         return Results.Ok();
     }

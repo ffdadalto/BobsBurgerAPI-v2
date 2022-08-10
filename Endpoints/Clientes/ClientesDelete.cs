@@ -8,18 +8,18 @@ public class ClientesDelete
     public static string[] Methods => new string[] { HttpMethod.Delete.ToString() };
     public static Delegate Handle => Action;
 
-    public static IResult Action([FromBody] int[] ids, AppDbContext context)
+    public static IResult Action([FromBody] int[] ids, AppDbContext ctx)
     {
         foreach (var id in ids)
         {
-            var cliente = context.Clientes.Where(s => s.Id == id).FirstOrDefault();
+            var cliente = ctx.Clientes.Where(s => s.Id == id).FirstOrDefault();
 
             if (cliente == null)
                 return Results.NotFound();
 
-            context.Clientes.Remove(cliente);
+            ctx.Clientes.Remove(cliente);
         }
-        context.SaveChanges();
+        ctx.SaveChanges();
 
         return Results.Ok();
     }

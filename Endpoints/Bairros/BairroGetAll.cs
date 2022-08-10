@@ -10,19 +10,10 @@ public class BairroGetAll
     public static string[] Methods => new string[] { HttpMethod.Get.ToString() };
     public static Delegate Handle => Action;
 
-    public record BairroResponse(int Id, string Nome, int CidadeId, bool Ativo);
-
-    public static IResult Action(AppDbContext context)
+    public static IResult Action(AppDbContext ctx)
     {
-        var bairros = context.Bairros;                      
+        var bairros = ctx.Bairros.OrderByDescending(b => b.Id);                      
 
-        var response = bairros.OrderByDescending(s => s.Id)
-            .Select(s => new BairroResponse(
-                s.Id,
-                s.Nome,                
-                s.CidadeId,                
-                s.Ativo));
-
-        return Results.Ok(response);
+        return Results.Ok(bairros);
     }
 }

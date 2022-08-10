@@ -11,21 +11,15 @@ public class CidadeGet
     public static string[] Methods => new string[] { HttpMethod.Get.ToString() };
     public static Delegate Handle => Action;
 
-    public static IResult Action([FromRoute] int id, AppDbContext context)
+    public static IResult Action([FromRoute] int id, AppDbContext ctx)
     {
-        var cidade = context.Cidades
+        var cidade = ctx.Cidades
             .Include(c => c.Bairros)
             .Where(s => s.Id == id)
             .FirstOrDefault();
 
         if (cidade == null)
-            return Results.NotFound();
-
-        //var response = new CidadeResponse(
-        //        cidade.Id,
-        //        cidade.Nome,
-        //        cidade.Bairros.Count(),
-        //        cidade.Ativo);
+            return Results.NotFound();        
 
         return Results.Ok(cidade);
     }

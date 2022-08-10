@@ -10,18 +10,18 @@ public class SituacoesDelete
     public static string[] Methods => new string[] { HttpMethod.Delete.ToString() };
     public static Delegate Handle => Action;
 
-    public static IResult Action([FromBody] int[] ids, AppDbContext context)
+    public static IResult Action([FromBody] int[] ids, AppDbContext ctx)
     {
         foreach (var id in ids)
         {
-            var situacao = context.Situacoes.Where(s => s.Id == id).FirstOrDefault();
+            var situacao = ctx.Situacoes.Where(s => s.Id == id).FirstOrDefault();
 
             if (situacao == null)
                 return Results.NotFound();
 
-            context.Situacoes.Remove(situacao);
+            ctx.Situacoes.Remove(situacao);
         }
-        context.SaveChanges();
+        ctx.SaveChanges();
 
         return Results.Ok();
     }

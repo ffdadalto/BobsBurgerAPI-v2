@@ -7,14 +7,11 @@ public class SituacaoGetAll
     public static string Template => "/situacao";
     public static string[] Methods => new string[] { HttpMethod.Get.ToString() };
     public static Delegate Handle => Action;
-
-    public record SituacaoResponse(int id, string nome, string cor, bool ativo);
-    public static IResult Action(AppDbContext context)
+    
+    public static IResult Action(AppDbContext ctx)
     {
-        var situacoes = context.Situacoes.ToList();
-        var response = situacoes.OrderByDescending(s => s.Id)
-            .Select(s => new SituacaoResponse(s.Id, s.Nome, s.Cor, s.Ativo));
+        var situacoes = ctx.Situacoes.OrderByDescending(s => s.Id);        
 
-        return Results.Ok(response);
+        return Results.Ok(situacoes);
     }
 }

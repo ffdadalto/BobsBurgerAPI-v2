@@ -1,4 +1,5 @@
-﻿using BobsBurgerAPI_v2.Infra.Data;
+﻿using BobsBurgerAPI_v2.Domain.Enderecos;
+using BobsBurgerAPI_v2.Infra.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -10,36 +11,14 @@ public class ClienteGet
     public static string[] Methods => new string[] { HttpMethod.Get.ToString() };
     public static Delegate Handle => Action;
 
-    public record ClienteResponse(
-        int Id,
-        string Nome,
-        string Apelido,
-        string Telefone,
-        string? Cep,
-        string Endereco,
-        string Numero,        
-        bool Ativo,
-        int BairroId);
-
-    public static IResult Action([FromRoute] int id, AppDbContext context)
+    public static IResult Action([FromRoute] int id, AppDbContext ctx)
     {
-        var cliente = context.Clientes
+        var cliente = ctx.Clientes.Include(c => c.Bairro)
             .Where(s => s.Id == id).FirstOrDefault();
 
         if (cliente == null)
-            return Results.NotFound();
+            return Results.NotFound();       
 
-        var response = new ClienteResponse(
-            cliente.Id,
-            cliente.Nome,
-            cliente.Apelido,
-            cliente.Telefone,
-            cliente.Cep,
-            cliente.Endereco,
-            cliente.Numero,
-            cliente.Ativo,
-            cliente.BairroId);
-
-        return Results.Ok(response);
+        return Results.Ok(cliente);
     }
 }

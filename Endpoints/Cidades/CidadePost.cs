@@ -7,26 +7,18 @@ public class CidadePost
 {
     public static string Template => "/cidade";
     public static string[] Methods => new string[] { HttpMethod.Post.ToString() };
-    public static Delegate Handle => Action;
-    
-    public record CidadeRequest(string Nome, bool Ativo);
-    public record CidadeResponse(int Id, string Nome, bool Ativo);
+    public static Delegate Handle => Action;    
 
-    public static IResult Action(CidadeRequest cidadeRequest, AppDbContext context)
+    public static IResult Action(Cidade req, AppDbContext ctx)
     {
-        var cidade = new Cidade(cidadeRequest.Nome, cidadeRequest.Ativo);
+        var cidade = new Cidade(req.Nome, req.Ativo);
 
         if (cidade == null)
             return Results.BadRequest();
 
-        context.Cidades.Add(cidade);
-        context.SaveChanges();
+        ctx.Cidades.Add(cidade);
+        ctx.SaveChanges();        
 
-        var response = new CidadeResponse(
-            cidade.Id, 
-            cidade.Nome,             
-            cidade.Ativo);
-
-        return Results.Created($"/cidade/{cidade.Id}", response);        
+        return Results.Created($"/cidade/{cidade.Id}", cidade);        
     }
 }

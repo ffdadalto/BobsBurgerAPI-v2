@@ -6,16 +6,12 @@ public class PagamentoGetAll
 {
     public static string Template => "/pagamento";
     public static string[] Methods => new string[] { HttpMethod.Get.ToString() };
-    public static Delegate Handle => Action;
+    public static Delegate Handle => Action;    
 
-    public record PagamentoResponse(int Id, string Nome, decimal Taxa, bool Ativo);
-
-    public static IResult Action(AppDbContext context)
+    public static IResult Action(AppDbContext ctx)
     {
-        var pagamentos = context.Pagamentos.ToList();
-        var response = pagamentos.OrderByDescending(s => s.Id)
-            .Select(s => new PagamentoResponse(s.Id, s.Nome, s.Taxa, s.Ativo));
+        var pagamentos = ctx.Pagamentos.OrderByDescending(p => p.Id);        
 
-        return Results.Ok(response);
+        return Results.Ok(pagamentos);
     }
 }

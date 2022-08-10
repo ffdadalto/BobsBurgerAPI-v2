@@ -5,14 +5,16 @@ namespace BobsBurgerAPI_v2.Domain.Clientes;
 public class Cliente : Entity
 {
     public string? Apelido { get; set; }
-    public string Telefone { get; set; }
+    public string? Telefone { get; set; }
     public string? Cep { get; set; }
-    public string Endereco { get; set; }
-    public string Numero { get; set; }
-    public int BairroId { get; set; }    
+    public string? Endereco { get; set; }
+    public string? Numero { get; set; }
+    public int BairroId { get; set; }
+    public virtual Bairro? Bairro { get; set; }
 
     public Cliente(string nome, string apelido, string telefone, 
-        string cep, string endereco, string numero, bool ativo, int bairroId)
+        string cep, string endereco, string numero, bool ativo, 
+        int bairroId)
     {
         Nome = nome;
         Apelido = apelido;
@@ -21,9 +23,10 @@ public class Cliente : Entity
         Endereco = endereco;
         Numero = numero;
         BairroId = bairroId;
+        Bairro = null;
         Ativo = ativo;
         CriadoPor = "Dev";
-        CriadodEm = DateTime.Now;
+        CriadodEm = DateTime.Now;        
     }
 
     public void EditInfo(string nome, string apelido, string telefone, 

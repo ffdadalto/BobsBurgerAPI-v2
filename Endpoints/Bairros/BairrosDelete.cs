@@ -8,18 +8,18 @@ public class BairrosDelete
     public static string[] Methods => new string[] { HttpMethod.Delete.ToString() };
     public static Delegate Handle => Action;
 
-    public static IResult Action([FromBody] int[] ids, AppDbContext context)
+    public static IResult Action([FromBody] int[] ids, AppDbContext ctx)
     {
         foreach (var id in ids)
         {
-            var bairro = context.Bairros.Where(s => s.Id == id).FirstOrDefault();
+            var bairro = ctx.Bairros.Where(s => s.Id == id).FirstOrDefault();
 
             if (bairro == null)
                 return Results.NotFound();
 
-            context.Bairros.Remove(bairro);
+            ctx.Bairros.Remove(bairro);
         }
-        context.SaveChanges();
+        ctx.SaveChanges();
 
         return Results.Ok();
     }

@@ -11,21 +11,21 @@ public class SituacaoGet
     public static string[] Methods => new string[] { HttpMethod.Get.ToString() };
     public static Delegate Handle => Action;
 
-    public record SituacaoResponse(int id, string nome, string cor, bool ativo);
-
-    public static IResult Action([FromRoute] int id, AppDbContext context)
+    public static IResult Action([FromRoute] int id, AppDbContext ctx)
     {
-        var situacao = context.Situacoes.Where(s => s.Id == id).FirstOrDefault();
+        var situacao = ctx.Situacoes.Where(s => s.Id == id).FirstOrDefault();
 
         if (situacao == null)
             return Results.NotFound();
 
-        var response = new SituacaoResponse(
-                situacao.Id,
-                situacao.Nome,
-                situacao.Cor,
-                situacao.Ativo);
+        return Results.Ok(situacao);
 
-        return Results.Ok(response);
+        //return Results.Ok(
+        //    new
+        //    {
+        //        id = situacao.Id,
+        //        nome = situacao.Nome,
+        //        cor = situacao.Cor
+        //    });
     }
 }

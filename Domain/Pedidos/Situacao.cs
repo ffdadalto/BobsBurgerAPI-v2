@@ -3,6 +3,7 @@
 public class Situacao : Entity
 {
     public string? Cor { get; set; }
+
     public Situacao(string nome, string cor, bool ativo)
     {
         Nome = nome;

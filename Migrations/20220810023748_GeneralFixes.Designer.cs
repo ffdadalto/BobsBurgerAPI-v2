@@ -4,6 +4,7 @@ using BobsBurgerAPI_v2.Infra.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BobsBurgerAPI_v2.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220810023748_GeneralFixes")]
+    partial class GeneralFixes
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -45,10 +47,11 @@ namespace BobsBurgerAPI_v2.Migrations
                         .HasColumnType("nvarchar(255)");
 
                     b.Property<string>("CriadoPor")
+                        .IsRequired()
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
-                    b.Property<DateTime?>("CriadodEm")
+                    b.Property<DateTime>("CriadodEm")
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime?>("EditadoEm")
@@ -64,6 +67,7 @@ namespace BobsBurgerAPI_v2.Migrations
                         .HasColumnType("nvarchar(255)");
 
                     b.Property<string>("Nome")
+                        .IsRequired()
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
@@ -99,10 +103,11 @@ namespace BobsBurgerAPI_v2.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("CriadoPor")
+                        .IsRequired()
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
-                    b.Property<DateTime?>("CriadodEm")
+                    b.Property<DateTime>("CriadodEm")
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime?>("EditadoEm")
@@ -113,6 +118,7 @@ namespace BobsBurgerAPI_v2.Migrations
                         .HasColumnType("nvarchar(255)");
 
                     b.Property<string>("Nome")
+                        .IsRequired()
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
@@ -135,10 +141,11 @@ namespace BobsBurgerAPI_v2.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("CriadoPor")
+                        .IsRequired()
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
-                    b.Property<DateTime?>("CriadodEm")
+                    b.Property<DateTime>("CriadodEm")
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime?>("EditadoEm")
@@ -149,6 +156,7 @@ namespace BobsBurgerAPI_v2.Migrations
                         .HasColumnType("nvarchar(255)");
 
                     b.Property<string>("Nome")
+                        .IsRequired()
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
@@ -169,10 +177,11 @@ namespace BobsBurgerAPI_v2.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("CriadoPor")
+                        .IsRequired()
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
-                    b.Property<DateTime?>("CriadodEm")
+                    b.Property<DateTime>("CriadodEm")
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime?>("EditadoEm")
@@ -183,6 +192,7 @@ namespace BobsBurgerAPI_v2.Migrations
                         .HasColumnType("nvarchar(255)");
 
                     b.Property<string>("Nome")
+                        .IsRequired()
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
@@ -212,10 +222,11 @@ namespace BobsBurgerAPI_v2.Migrations
                         .HasColumnType("nvarchar(255)");
 
                     b.Property<string>("CriadoPor")
+                        .IsRequired()
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
-                    b.Property<DateTime?>("CriadodEm")
+                    b.Property<DateTime>("CriadodEm")
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime?>("EditadoEm")
@@ -226,6 +237,7 @@ namespace BobsBurgerAPI_v2.Migrations
                         .HasColumnType("nvarchar(255)");
 
                     b.Property<string>("Nome")
+                        .IsRequired()
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 

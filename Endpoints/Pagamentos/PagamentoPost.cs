@@ -9,22 +9,17 @@ public class PagamentoPost
     public static string[] Methods => new string[] { HttpMethod.Post.ToString() };
     public static Delegate Handle => Action;
 
-    public record PagamentoResponse(int Id, string Nome, decimal Taxa, bool Ativo);
-    public record PagamentoRequest(string Nome, decimal Taxa, bool Ativo);
-
-    public static IResult Action(PagamentoRequest pagamentoRequest, AppDbContext context)
+    public static IResult Action(Pagamento req, AppDbContext ctx)
     {
-        var pagamento = new Pagamento(pagamentoRequest.Nome, pagamentoRequest.Taxa, pagamentoRequest.Ativo);
+        var pagamento = new Pagamento(req.Nome, req.Taxa, req.Ativo);
 
         if (pagamento == null)
             return Results.BadRequest();
 
 
-        context.Pagamentos.Add(pagamento);
-        context.SaveChanges();
+        ctx.Pagamentos.Add(pagamento);
+        ctx.SaveChanges();
 
-        var response = new PagamentoResponse(pagamento.Id, pagamento.Nome, pagamento.Taxa, pagamento.Ativo);
-
-        return Results.Created($"/situacao/{response.Id}", response);
+        return Results.Created($"/situacao/{pagamento.Id}", pagamento);
     }
 }

@@ -10,23 +10,18 @@ public class SituacaoPut
     public static string[] Methods => new string[] { HttpMethod.Put.ToString() };
     public static Delegate Handle => Action;
 
-    public record SituacaoResponse(int id, string nome, string cor, bool ativo);
-    public record SituacaoRequest(string Nome, string Cor, bool Ativo);
-
-    public static IResult Action([FromRoute] int id,  SituacaoRequest situacaoRequest, AppDbContext context)
+    public static IResult Action([FromRoute] int id,  Situacao req, AppDbContext ctx)
     {
-        var situacao = context.Situacoes.Where(s => s.Id == id).FirstOrDefault();
+        var situacao = ctx.Situacoes.Where(s => s.Id == id).FirstOrDefault();
 
         if (situacao == null)
             return Results.NotFound();
 
-        situacao.EditInfo(situacaoRequest.Nome, situacaoRequest.Cor,  situacaoRequest.Ativo);
+        situacao.EditInfo(req.Nome, req.Cor, req.Ativo);
 
-        //context.Situacoes.Add(situacao);
-        context.SaveChanges();
+        
+        ctx.SaveChanges();
 
-        var response = new SituacaoResponse(situacao.Id, situacao.Nome, situacao.Cor, situacao.Ativo);
-
-        return Results.Ok(response);
+        return Results.Ok(situacao);
     }
 }
